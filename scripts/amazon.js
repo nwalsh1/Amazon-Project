@@ -36,7 +36,7 @@ products.forEach((product) =>{
       <div class="product-price">$${(product.priceCents/100).toFixed(2)}</div>
 
       <div class="product-quantity-container">
-        <select class="js-quantity-selecto-${product.id}">
+        <select class="js-quantity-selector-${product.id}">
           <option selected value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -52,7 +52,7 @@ products.forEach((product) =>{
 
       <div class="product-spacer"></div>
 
-      <div class="added-to-cart">
+      <div class="added-to-cart js-added-to-cart-${product.id}">
         <img src="images/icons/checkmark.png" />
         Added
       </div>
@@ -63,6 +63,9 @@ products.forEach((product) =>{
 });
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
+//13m
+let timeout;
 
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', ()=>{
@@ -78,7 +81,8 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
 
     //gives us all data attributes attached to the button
     //converts kabab case to camel case
-    const productId = button.dataset.productId;
+    //13h
+    const { productId } = button.dataset;
 
     let matchingItem;
 
@@ -87,14 +91,29 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
         matchingItem = item;
       }
     });
-    const selectedQuantity = Number(document.querySelector(`.js-quantity-selecto-${productId}`).value);
+    const quantity = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
+    
+    //13j
+    const addMessageElement = document.querySelector(`.js-added-to-cart-${productId}`);
+    //13k
+    addMessageElement.classList.add('visible-add');
+
+    //13m
+     clearTimeout(timeout);
+    //13l
+    timeout = setTimeout(() => {
+      addMessageElement.classList.remove('visible-add');
+    },2000)
+   
+   
 
     if(matchingItem){
-      matchingItem.quantity += selectedQuantity;
+      matchingItem.quantity += quantity;
     }else{
       cart.push({
-        productId: productId,
-        quantity: selectedQuantity
+        //used the shortcut instead of productId : productId
+        productId,
+        quantity
       });
     }
 
