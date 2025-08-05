@@ -15,6 +15,7 @@ Main Idea of Javascript
 //import the variable cart and rename it to myCart
 //import {cart as myCart} from '../data/cart.js'
 import {cart} from '../data/cart.js'
+import {products} from '../data/products.js'
 //imports need to be at the top, and to use modules we need live server - can't open html file directly
 
 
