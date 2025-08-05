@@ -14,11 +14,18 @@ Main Idea of Javascript
 
 //import the variable cart and rename it to myCart
 //import {cart as myCart} from '../data/cart.js'
-import {cart} from '../data/cart.js'
+import {cart, addToCart} from '../data/cart.js'
 import {products} from '../data/products.js'
 //imports need to be at the top, and to use modules we need live server - can't open html file directly
 
+/* 
+Alternate option for multiple imports from same file:
+import * as cartModule from '../data/cart.js' - imports everything into object
 
+cartModule.cart;
+cartModule.addToCart('id');
+
+*/
 let productsHTML = '';
 
 products.forEach((product) =>{
@@ -75,8 +82,16 @@ products.forEach((product) =>{
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
-//13m
-let timeout;
+//changes innerHTML so stays in this file
+function updateCartQuantity(){
+  let cartQuantity = 0;
+    
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
+
+  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+}
 
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', ()=>{
@@ -95,45 +110,9 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     //13h
     const { productId } = button.dataset;
 
-    let matchingItem;
+    //split up code into smaller functions - better readability
+    addToCart(productId);
+    updateCartQuantity();
 
-    cart.forEach((item) => {
-      if(productId === item.productId){
-        matchingItem = item;
-      }
-    });
-    const quantity = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
-    
-    //13j
-    const addMessageElement = document.querySelector(`.js-added-to-cart-${productId}`);
-    //13k
-    addMessageElement.classList.add('visible-add');
-
-    //13m
-     clearTimeout(timeout);
-    //13l
-    timeout = setTimeout(() => {
-      addMessageElement.classList.remove('visible-add');
-    },2000)
-   
-   
-
-    if(matchingItem){
-      matchingItem.quantity += quantity;
-    }else{
-      cart.push({
-        //used the shortcut instead of productId : productId
-        productId,
-        quantity
-      });
-    }
-
-    let cartQuantity = 0;
-    
-    cart.forEach((item) => {
-      cartQuantity += item.quantity;
-    });
-
-    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
   });
 });
