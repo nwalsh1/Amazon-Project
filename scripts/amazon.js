@@ -8,6 +8,16 @@ Main Idea of Javascript
 //save the information about our products in the JavaScript file using an array of objects
 //structure needs to be the same so we can have modularity
 
+//naming conflict, its hard to tell which variables have been made in other files
+//const cart = [];
+
+
+//import the variable cart and rename it to myCart
+//import {cart as myCart} from '../data/cart.js'
+import {cart} from '../data/cart.js'
+//imports need to be at the top, and to use modules we need live server - can't open html file directly
+
+
 let productsHTML = '';
 
 products.forEach((product) =>{

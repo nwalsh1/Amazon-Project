@@ -60,11 +60,49 @@
     </div>
     <!-- This is where my code Starts: -->
 
-    <!-- load the cart-->
-    <script src="data/cart.js"></script>
+    <!-- MODULES
+    1. Combine all the files together into 1 big file.
+
+    2. Run all the code. 
+
+    This can cause naming conflicts. We can't use the variable name cart in any files since we use it in cart.js
+
+    Modules
+    contains varialbes, prevents conflicts
+
+    When we use a script tag it will:
+    1. Run all of the code in cart.js
+    2. Create a cart variable
+    3. Cause a naming mconflict
+
+    By removing the script tag we no longer run all of the code in cart.js
+    Not longer creating a cart variable and create a naming conflict
+
+    Create a Module:
+    1. create a file (ie cart.js)
+    2. Don't load the file with a <script> tag
+    
+    Any variables we create inside the file willbe contained inside the file
+    we can't access cart from the outside
+
+    Get a Variable Out of a File:
+    1. Add type="module" attribute - Let's this file get variables out of other files.
+    2. Export
+    3. Import
+
+    Benifits:
+    1. Helps us avoid naming conflicts
+    2. Don't have to worry about the order of our files - order of <script> matters
+
+      Modules are better ways to organize code
+
+    -->
+
+    <!-- load the cart <script src="data/cart.js"></script>-->
+
     <!-- create the products array containing all of our data -->
     <script src="data/products.js"></script>
     <!-- use data to generate the HTML -->
-    <script src="scripts/amazon.js"></script>
+    <script type="'module" src="scripts/amazon.js"></script>
   </body>
 </html>
