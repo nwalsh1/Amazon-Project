@@ -1,5 +1,5 @@
 //Export cart
-export const cart = [{
+export let cart = [{
   productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6', //use the ID to find the product info, just need to save this, dedupe/normalizing the data
   quantity: 2
 },
@@ -53,4 +53,25 @@ export function addToCart(productId) {
       quantity
     });
   }
+}
+
+export function removeFromCart(productId){
+  /**
+   * Steps:
+   * 1. Create a new array
+   * 2. Loop through the cart
+   * 3. Add each product to the new array exept for this productId
+  */
+
+  //1
+  const newCart = [];
+  //2
+  cart.forEach((cartItem) => {
+    //3 
+    if(cartItem.productId !== productId){
+      newCart.push(cartItem);
+    }
+  });
+
+  cart = newCart;
 }
