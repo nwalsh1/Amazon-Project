@@ -111,4 +111,13 @@ document.querySelectorAll('.js-delete-link')
  * 
  * How do we know which element to get?
  * Add a special class to the container. And used the product Id to delete
+ * 
+ * 14 Modules:
+ * In this lesson:
+ * 1. Modules = better way to organize our code
+ * 2. Created the checkout page
+ * 3. HTML link elements and radio seleters
+ * 4. Made the delete link interactive
+ * 5. Saved the cart in localStorage
+ * 
 */
