@@ -19,7 +19,8 @@ cart.forEach((cartItem) =>{
   //ane example of normalizing/de-duping our data
 
   cartSummaryHTML += `
-  <div class="cart-item-container">
+  <div class="cart-item-container 
+    js-cart-item-container-${matchingProduct.id}">
     <div class="delivery-date">Delivery date: Tuesday, June 21</div>
 
     <div class="cart-item-details-grid">
@@ -89,13 +90,25 @@ cart.forEach((cartItem) =>{
   
 });
 
-document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML ;;
-  console.log(cartSummaryHTML);
-
+document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
+//  console.log(cartSummaryHTML);
+//when we click delete - 1. delete item from cart 2. update HTML to reflect deletion
 document.querySelectorAll('.js-delete-link')
 .forEach((link) =>{
   link.addEventListener('click', () => {
     const productId = link.dataset.productId;
     removeFromCart(productId);
+    //select the specific container
+    const container = document.querySelector(`.js-cart-item-container-${productId}`);
+    container.remove();
   });
 });
+
+/*Delete DOM*
+ * 1. Use the Dom to get the element to remove
+ * 2. Use .remove() method
+ * 
+ * 
+ * How do we know which element to get?
+ * Add a special class to the container. And used the product Id to delete
+*/
